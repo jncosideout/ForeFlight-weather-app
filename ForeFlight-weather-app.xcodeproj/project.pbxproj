@@ -9,13 +9,18 @@
 /* Begin PBXBuildFile section */
 		8938459B26331FC500DBC43E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8938459A26331FC500DBC43E /* AppDelegate.swift */; };
 		8938459D26331FC500DBC43E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8938459C26331FC500DBC43E /* SceneDelegate.swift */; };
-		8938459F26331FC600DBC43E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8938459E26331FC500DBC43E /* ViewController.swift */; };
+		8938459F26331FC600DBC43E /* AirportListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8938459E26331FC500DBC43E /* AirportListViewController.swift */; };
 		893845A226331FC600DBC43E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 893845A026331FC600DBC43E /* Main.storyboard */; };
 		893845A526331FC600DBC43E /* ForeFlight_weather_app.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 893845A326331FC600DBC43E /* ForeFlight_weather_app.xcdatamodeld */; };
 		893845A726331FC600DBC43E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 893845A626331FC600DBC43E /* Assets.xcassets */; };
 		893845AA26331FC600DBC43E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 893845A826331FC600DBC43E /* LaunchScreen.storyboard */; };
 		893845B526331FC700DBC43E /* ForeFlight_weather_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893845B426331FC700DBC43E /* ForeFlight_weather_appTests.swift */; };
 		893845C026331FC700DBC43E /* ForeFlight_weather_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893845BF26331FC700DBC43E /* ForeFlight_weather_appUITests.swift */; };
+		893845D8263320B000DBC43E /* NetworkArchitecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893845D7263320B000DBC43E /* NetworkArchitecture.swift */; };
+		893845DE263321BB00DBC43E /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893845DD263321BB00DBC43E /* WeatherResponse.swift */; };
+		893845E6263341D200DBC43E /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893845E5263341D200DBC43E /* Formatters.swift */; };
+		893845EB263345D200DBC43E /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893845EA263345D200DBC43E /* Resources.swift */; };
+		89384602263387F100DBC43E /* WeatherServiceWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89384601263387F100DBC43E /* WeatherServiceWorker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +44,7 @@
 		8938459726331FC500DBC43E /* ForeFlight-weather-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ForeFlight-weather-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8938459A26331FC500DBC43E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8938459C26331FC500DBC43E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8938459E26331FC500DBC43E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8938459E26331FC500DBC43E /* AirportListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportListViewController.swift; sourceTree = "<group>"; };
 		893845A126331FC600DBC43E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		893845A426331FC600DBC43E /* ForeFlight_weather_app.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ForeFlight_weather_app.xcdatamodel; sourceTree = "<group>"; };
 		893845A626331FC600DBC43E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -51,6 +56,11 @@
 		893845BB26331FC700DBC43E /* ForeFlight-weather-appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ForeFlight-weather-appUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		893845BF26331FC700DBC43E /* ForeFlight_weather_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForeFlight_weather_appUITests.swift; sourceTree = "<group>"; };
 		893845C126331FC700DBC43E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		893845D7263320B000DBC43E /* NetworkArchitecture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkArchitecture.swift; sourceTree = "<group>"; };
+		893845DD263321BB00DBC43E /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
+		893845E5263341D200DBC43E /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
+		893845EA263345D200DBC43E /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
+		89384601263387F100DBC43E /* WeatherServiceWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherServiceWorker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,9 +111,12 @@
 		8938459926331FC500DBC43E /* ForeFlight-weather-app */ = {
 			isa = PBXGroup;
 			children = (
+				893845E4263341C700DBC43E /* Utilities */,
+				893845DC263321A700DBC43E /* Models */,
+				893845D62633206700DBC43E /* Services */,
 				8938459A26331FC500DBC43E /* AppDelegate.swift */,
 				8938459C26331FC500DBC43E /* SceneDelegate.swift */,
-				8938459E26331FC500DBC43E /* ViewController.swift */,
+				8938459E26331FC500DBC43E /* AirportListViewController.swift */,
 				893845A026331FC600DBC43E /* Main.storyboard */,
 				893845A626331FC600DBC43E /* Assets.xcassets */,
 				893845A826331FC600DBC43E /* LaunchScreen.storyboard */,
@@ -129,6 +142,32 @@
 				893845C126331FC700DBC43E /* Info.plist */,
 			);
 			path = "ForeFlight-weather-appUITests";
+			sourceTree = "<group>";
+		};
+		893845D62633206700DBC43E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				893845D7263320B000DBC43E /* NetworkArchitecture.swift */,
+				893845EA263345D200DBC43E /* Resources.swift */,
+				89384601263387F100DBC43E /* WeatherServiceWorker.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		893845DC263321A700DBC43E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				893845DD263321BB00DBC43E /* WeatherResponse.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		893845E4263341C700DBC43E /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				893845E5263341D200DBC43E /* Formatters.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,9 +301,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				893845A526331FC600DBC43E /* ForeFlight_weather_app.xcdatamodeld in Sources */,
-				8938459F26331FC600DBC43E /* ViewController.swift in Sources */,
+				89384602263387F100DBC43E /* WeatherServiceWorker.swift in Sources */,
+				893845DE263321BB00DBC43E /* WeatherResponse.swift in Sources */,
+				8938459F26331FC600DBC43E /* AirportListViewController.swift in Sources */,
+				893845D8263320B000DBC43E /* NetworkArchitecture.swift in Sources */,
 				8938459B26331FC500DBC43E /* AppDelegate.swift in Sources */,
+				893845EB263345D200DBC43E /* Resources.swift in Sources */,
 				8938459D26331FC500DBC43E /* SceneDelegate.swift in Sources */,
+				893845E6263341D200DBC43E /* Formatters.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,7 +414,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -425,7 +469,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

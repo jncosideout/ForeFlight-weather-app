@@ -18,9 +18,24 @@ class ForeFlight_weather_appTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testWeatherService() {
+        let expectation = self.expectation(description: "ForeFlight weather api download")
+
+        let weatherServiceWorker = WeatherServiceWorker()
+        weatherServiceWorker.fetchWeather(forAirport: "kaus") { weatherResponse in
+            guard let weatherResponse = weatherResponse else {
+                XCTFail("Failed with nil weatherResponse")
+                expectation.fulfill()
+                return
+            }
+
+           // XCTAssertNotNil(weatherResponse.report.forecast.conditions.first?.period, "forecast condition first has no period")
+            XCTAssertNotNil(weatherResponse.report.conditions.ident, "conditions.ident nil")
+
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 10, handler: nil)
+        
     }
 
     func testPerformanceExample() throws {
