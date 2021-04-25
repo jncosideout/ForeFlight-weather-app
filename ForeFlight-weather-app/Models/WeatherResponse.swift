@@ -8,9 +8,7 @@
 import Foundation
 
 struct WeatherResponse: Codable {
-//    enum CodingKeys: String, CodingKeys {
-//        case
-//    }
+
     let report: Report
 
     struct Report: Codable {
@@ -20,7 +18,7 @@ struct WeatherResponse: Codable {
         struct Conditions: Codable {
             let text: String
             let ident: String?
-            let dateIssued: Date?
+            let dateIssued: String
             let lat: Double
             let lon: Double
             let elevationFt: Double
@@ -28,12 +26,12 @@ struct WeatherResponse: Codable {
             let dewpointC: Double?
             let pressureHg: Double?
             let densityAltitudeFt: Int?
-//            let relativeHumidity: Int
-//            let flightRules: String
-//            let cloudLayers: [CloudLayers]
-//            let visibility: Visibility
-//            let wind: Wind
-//            let period: Forecast.Period?
+            let relativeHumidity: Int
+            let flightRules: String
+            let cloudLayers: [CloudLayers]
+            let visibility: Visibility
+            let wind: Wind
+            let period: Forecast.Period?
 
             struct CloudLayers: Codable {
                 let coverage: String
@@ -59,16 +57,16 @@ struct WeatherResponse: Codable {
         struct Forecast: Codable {
             let text: String
             let ident: String
-            let dateIssued: Date?
+            let dateIssued: String?
             let period: Period
             let lat: Double
             let lon: Double
             let elevationFt: Double
-//            let conditions: [Conditions]
+            let conditions: [Conditions]
 
             struct Period: Codable {
-                let dateStart: Date?
-                let dateEnd: Date?
+                let dateStart: String?
+                let dateEnd: String?
             }
         }
     }

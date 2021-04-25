@@ -57,7 +57,11 @@ extension NetworkRequest {
                 return
             }
 
-            completion(self.decode(data), nil)
+            if let model = self.decode(data) {
+                completion(model, nil)
+            } else {
+                completion(nil, .invalidData)
+            }
         }
         task.resume()
     }
