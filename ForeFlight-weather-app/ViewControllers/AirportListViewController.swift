@@ -11,24 +11,17 @@ class AirportListViewController: UITableViewController {
 
     var airportsStore: AirportStore!
     var report: WeatherResponse.Report?
+    var reportsStore = ReportsStore()
 
     @IBOutlet weak var searchTextField: UITextField!
     @IBAction func lookUpButton(_ sender: Any) {
-        let weatherService = WeatherServiceWorker()
-        if let airport = searchTextField.text {
-            airportsStore.allAirports.append(airport)
-            tableView.reloadData()
-            weatherService.fetchWeather(forAirport: airport) { [weak self] weatherResponse in
-                if let weatherResponse = weatherResponse {
-                    self?.report = weatherResponse.report
 
-                    DispatchQueue.main.async {
-                        let storyboard = UIStoryboard(name: "Main", bundle: .main)
-                        let airportDetailViewController = storyboard.instantiateViewController(withIdentifier: "AirportDetailViewController") as! AirportDetailViewController
-                        airportDetailViewController.report = weatherResponse.report
-                        self?.showDetailViewController(airportDetailViewController, sender: self)
-                    }
-                }
+        if let airport = searchTextField.text {
+            let airportUpper = airport.uppercased()
+            if !airportsStore.allAirports.contains(airportUpper) {
+                airportsStore.allAirports.append(airportUpper)
+                tableView.reloadData()
+                report = reportsStore.getReport(for: airportUpper)
             }
         }
     }
@@ -44,15 +37,28 @@ class AirportListViewController: UITableViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let airportDetailViewController = segue.destination as! AirportDetailViewController
+        airportDetailViewController.reportsStore = reportsStore
+        if let report = self.report {
+            airportDetailViewController.report = report
+        }
         switch segue.identifier {
-        case "ShowAirportDetails":
+        case "AirportDetailFromCell":
             if let row = tableView.indexPathForSelectedRow?.row {
                 // Get the airport associated with this row and pass it along
                 let airport = airportsStore.allAirports[row]
-                let airportDetailViewController = segue.destination as! AirportDetailViewController
-                if let report = self.report {
+                airportDetailViewController.airportName = airport
+                if let report = reportsStore.getReport(for: airport) {
                     airportDetailViewController.report = report
                 }
+            } else {
+                airportDetailViewController.airportName = "error"
+            }
+        case "AirportDetailFromLookup":
+            if let airport = searchTextField.text {
+                airportDetailViewController.airportName = airport
+            } else {
+                airportDetailViewController.airportName = "error"
             }
         default:
             preconditionFailure("Unexpected segue identifier.")

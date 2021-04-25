@@ -13,7 +13,7 @@ struct WeatherResponse: Codable {
 
     struct Report: Codable {
         let conditions: Conditions
-        let forecast: Forecast?
+        let forecast: Forecast
 
         struct Conditions: Codable {
             let text: String
@@ -48,8 +48,8 @@ struct WeatherResponse: Codable {
 
             struct Wind: Codable {
                 let speedKts: Double
-                let direction: Int
-                let from: Int
+                let direction: Int?
+                let from: Int?
                 let variable: Bool
             }
         }

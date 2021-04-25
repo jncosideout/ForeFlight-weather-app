@@ -12,6 +12,21 @@ enum NetworkArchError: Error {
     case failedRequest(Error?)
     case invalidData
     case wrongMIME
+
+    var localizedDescription: String {
+        switch self {
+        case .invalidResponse(let code):
+            return "invalidRespose: http error code \(String(format: "%d", code ?? ""))"
+        case .noData:
+            return "noData returned by response"
+        case .failedRequest(let error):
+            return "failedRequest: \(error?.localizedDescription ?? "")"
+        case .invalidData:
+            return "invalidData: could not be parsed into model"
+        case .wrongMIME:
+            return "wrongMIME: expected a different MIME type from server"
+        }
+    }
 }
 
 protocol NetworkRequest: AnyObject {
