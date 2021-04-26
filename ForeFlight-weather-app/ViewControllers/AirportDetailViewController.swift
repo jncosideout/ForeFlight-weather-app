@@ -34,8 +34,9 @@ class AirportDetailViewController: UITableViewController {
     @IBOutlet weak var periodStartStackView: UIStackView!
     @IBOutlet weak var periodEndStackView: UIStackView!
     
-
     let sectionNames = ["Period","Cloud Layers", "Visibility", "Wind"]
+
+    // MARK: - VC lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let report = report {
@@ -45,6 +46,11 @@ class AirportDetailViewController: UITableViewController {
             activitySpinner.startAnimating()
             getWeatherReport()
         }
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
     }
 
     func setupView(_ conditions: WeatherResponse.Report.Conditions) {
@@ -71,6 +77,7 @@ class AirportDetailViewController: UITableViewController {
         tableView.reloadData()
     }
 
+    // MARK: - Weather service
     func getWeatherReport() {
         let weatherService = WeatherServiceWorker()
         if let airport = airportName {
@@ -88,11 +95,7 @@ class AirportDetailViewController: UITableViewController {
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
-
+    // MARK: - Helper functions
     @IBAction func showNextForecastConditions(_ sender: Any) {
         if let report = report {
             if let forecast = report.forecast {
@@ -119,7 +122,18 @@ class AirportDetailViewController: UITableViewController {
         }
     }
 
-    // MARK: - dataSource delgate fxns
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        setPeriodLabels()
+    }
+
+    func setPeriodLabels() {
+        if forecastMode, let currentConditions = currentConditions {
+            periodStartLabel.text = currentConditions.period?.dateStart
+            periodEndLabel.text = currentConditions.period?.dateEnd
+        }
+    }
+
+    // MARK: - dataSource and tableView delgate functions
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
@@ -142,20 +156,8 @@ class AirportDetailViewController: UITableViewController {
         return sectionNames[section + 1]
     }
 
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        setPeriodLabels()
-    }
-
-    func setPeriodLabels() {
-        if forecastMode, let currentConditions = currentConditions {
-            periodStartLabel.text = currentConditions.period?.dateStart
-            periodEndLabel.text = currentConditions.period?.dateEnd
-        }
-    }
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("indexPath startIndex = \(indexPath.startIndex) , indexPath endIndex = \(indexPath.endIndex)")
-        print("indexPath section = \(indexPath.section) , indexPath row = \(indexPath.row)")
+
         // Get a new or recycled cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as! DetailCell
 

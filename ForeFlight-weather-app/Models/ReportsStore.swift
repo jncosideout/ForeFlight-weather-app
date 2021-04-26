@@ -27,4 +27,15 @@ class ReportsStore {
         removeReport(for: report.forecast?.ident ?? "")
         allReports.append(report)
     }
+
+    func updateReport(for airport: String) {
+        removeReport(for: airport)
+        let weatherService = WeatherServiceWorker()
+        weatherService.fetchWeather(forAirport: airport) { weatherResponse in
+            if let report = weatherResponse?.report {
+                self.addReport(report)
+                print("report for \(airport) updated at \(Date(timeIntervalSinceNow: 0))")
+            }
+        }
+    }
 }

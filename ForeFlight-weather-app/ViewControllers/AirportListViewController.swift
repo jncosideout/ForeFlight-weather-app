@@ -13,6 +13,13 @@ class AirportListViewController: UITableViewController {
     var report: WeatherResponse.Report?
     var reportsStore = ReportsStore()
 
+    var reportUpdateIndex = 0
+    let reportUpdateQueue = DispatchQueue(
+        label: "ReportUpdate",
+        qos: .background,
+        attributes: .concurrent)
+    var reportUpdateTimer = Timer()
+
     @IBOutlet weak var searchTextField: UITextField!
     @IBAction func lookUpButton(_ sender: Any) {
 
@@ -26,9 +33,16 @@ class AirportListViewController: UITableViewController {
         }
     }
 
+    // MARK: - VC lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        reportUpdateTimer = Timer.scheduledTimer(
+                timeInterval: 10,
+                target: self,
+                selector: #selector(updateReports(timer:)),
+                userInfo: nil,
+                repeats: true
+            )
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -89,5 +103,19 @@ class AirportListViewController: UITableViewController {
             cell.dismiss()
         }
     }
-}
+
+    // MARK: - Update reports
+
+    @objc func updateReports(timer: Timer) {
+        let airportToUpdate = airportsStore.allAirports[reportUpdateIndex]
+        reportUpdateQueue.async {
+            self.reportsStore.updateReport(for: airportToUpdate)
+        }
+
+        reportUpdateIndex += 1
+        if reportUpdateIndex >= airportsStore.allAirports.count {
+            reportUpdateIndex = 0
+        }
+    }
+}//EoC
 
