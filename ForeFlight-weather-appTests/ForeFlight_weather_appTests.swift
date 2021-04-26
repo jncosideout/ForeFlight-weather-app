@@ -22,27 +22,39 @@ class ForeFlight_weather_appTests: XCTestCase {
         let expectation = self.expectation(description: "ForeFlight weather api download")
 
         let weatherServiceWorker = WeatherServiceWorker()
-        weatherServiceWorker.fetchWeather(forAirport: "kaus") { weatherResponse in
+        weatherServiceWorker.fetchWeather(forAirport: "KBJJ") { weatherResponse in
             guard let weatherResponse = weatherResponse else {
                 XCTFail("Failed with nil weatherResponse")
                 expectation.fulfill()
                 return
             }
 
-           // XCTAssertNotNil(weatherResponse.report.forecast.conditions.first?.period, "forecast condition first has no period")
+            if let forecast = weatherResponse.report.forecast {
+                if let forecastCondition1 = forecast.conditions.first {
+                    XCTAssertNotNil(forecastCondition1.period, "forecast first condition has no period")
+                } else {
+                    XCTFail("forecast has no conditions array data")
+                }
+            } else {
+                XCTFail("weatherResponse has no forecast")
+            }
             XCTAssertNotNil(weatherResponse.report.conditions.ident, "conditions.ident nil")
 
             expectation.fulfill()
         }
+
         waitForExpectations(timeout: 10, handler: nil)
-        
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testSaveAirportNames() {
+        let airportsStore = AirportStore()
+        airportsStore.allAirports.append("KBJJ")
+
+        if airportsStore.saveAirports() {
+            print("airport names saved")
         }
-    }
 
+        let newAirportsStore = AirportStore()
+        XCTAssert(newAirportsStore.allAirports.contains("KBJJ"), "airport names not saved")
+    }
 }

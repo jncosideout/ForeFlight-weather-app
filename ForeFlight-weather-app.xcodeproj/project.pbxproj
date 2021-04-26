@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8915ABFE2634A3DA00F357A5 /* AirportsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8915ABFD2634A3DA00F357A5 /* AirportsStore.swift */; };
+		8915AC042634BDF000F357A5 /* AirportCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8915AC032634BDF000F357A5 /* AirportCell.swift */; };
+		8915AC142634F00F00F357A5 /* AirportDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8915AC132634F00F00F357A5 /* AirportDetailViewController.swift */; };
 		8938459B26331FC500DBC43E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8938459A26331FC500DBC43E /* AppDelegate.swift */; };
 		8938459D26331FC500DBC43E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8938459C26331FC500DBC43E /* SceneDelegate.swift */; };
 		8938459F26331FC600DBC43E /* AirportListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8938459E26331FC500DBC43E /* AirportListViewController.swift */; };
@@ -21,6 +24,8 @@
 		893845E6263341D200DBC43E /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893845E5263341D200DBC43E /* Formatters.swift */; };
 		893845EB263345D200DBC43E /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893845EA263345D200DBC43E /* Resources.swift */; };
 		89384602263387F100DBC43E /* WeatherServiceWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89384601263387F100DBC43E /* WeatherServiceWorker.swift */; };
+		894337C12635CBD0000C7B76 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894337C02635CBD0000C7B76 /* DetailCell.swift */; };
+		895FCE692636110C00BE4652 /* ReportsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895FCE682636110C00BE4652 /* ReportsStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +46,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8915ABFD2634A3DA00F357A5 /* AirportsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportsStore.swift; sourceTree = "<group>"; };
+		8915AC032634BDF000F357A5 /* AirportCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportCell.swift; sourceTree = "<group>"; };
+		8915AC132634F00F00F357A5 /* AirportDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportDetailViewController.swift; sourceTree = "<group>"; };
 		8938459726331FC500DBC43E /* ForeFlight-weather-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ForeFlight-weather-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8938459A26331FC500DBC43E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8938459C26331FC500DBC43E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +69,8 @@
 		893845E5263341D200DBC43E /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
 		893845EA263345D200DBC43E /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		89384601263387F100DBC43E /* WeatherServiceWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherServiceWorker.swift; sourceTree = "<group>"; };
+		894337C02635CBD0000C7B76 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
+		895FCE682636110C00BE4652 /* ReportsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +98,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8915AC022634BDC900F357A5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8915AC032634BDF000F357A5 /* AirportCell.swift */,
+				894337C02635CBD0000C7B76 /* DetailCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		8938458E26331FC500DBC43E = {
 			isa = PBXGroup;
 			children = (
@@ -111,17 +130,13 @@
 		8938459926331FC500DBC43E /* ForeFlight-weather-app */ = {
 			isa = PBXGroup;
 			children = (
+				8915AC022634BDC900F357A5 /* Views */,
+				893845AB26331FC600DBC43E /* Info.plist */,
+				893C4F322634705700582743 /* SupportingFiles */,
+				893C4F2E26346D9400582743 /* ViewControllers */,
 				893845E4263341C700DBC43E /* Utilities */,
 				893845DC263321A700DBC43E /* Models */,
 				893845D62633206700DBC43E /* Services */,
-				8938459A26331FC500DBC43E /* AppDelegate.swift */,
-				8938459C26331FC500DBC43E /* SceneDelegate.swift */,
-				8938459E26331FC500DBC43E /* AirportListViewController.swift */,
-				893845A026331FC600DBC43E /* Main.storyboard */,
-				893845A626331FC600DBC43E /* Assets.xcassets */,
-				893845A826331FC600DBC43E /* LaunchScreen.storyboard */,
-				893845AB26331FC600DBC43E /* Info.plist */,
-				893845A326331FC600DBC43E /* ForeFlight_weather_app.xcdatamodeld */,
 			);
 			path = "ForeFlight-weather-app";
 			sourceTree = "<group>";
@@ -158,6 +173,8 @@
 			isa = PBXGroup;
 			children = (
 				893845DD263321BB00DBC43E /* WeatherResponse.swift */,
+				8915ABFD2634A3DA00F357A5 /* AirportsStore.swift */,
+				895FCE682636110C00BE4652 /* ReportsStore.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -168,6 +185,28 @@
 				893845E5263341D200DBC43E /* Formatters.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		893C4F2E26346D9400582743 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8938459E26331FC500DBC43E /* AirportListViewController.swift */,
+				8915AC132634F00F00F357A5 /* AirportDetailViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		893C4F322634705700582743 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				8938459A26331FC500DBC43E /* AppDelegate.swift */,
+				8938459C26331FC500DBC43E /* SceneDelegate.swift */,
+				893845A026331FC600DBC43E /* Main.storyboard */,
+				893845A626331FC600DBC43E /* Assets.xcassets */,
+				893845A826331FC600DBC43E /* LaunchScreen.storyboard */,
+				893845A326331FC600DBC43E /* ForeFlight_weather_app.xcdatamodeld */,
+			);
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,9 +341,14 @@
 			files = (
 				893845A526331FC600DBC43E /* ForeFlight_weather_app.xcdatamodeld in Sources */,
 				89384602263387F100DBC43E /* WeatherServiceWorker.swift in Sources */,
+				894337C12635CBD0000C7B76 /* DetailCell.swift in Sources */,
+				895FCE692636110C00BE4652 /* ReportsStore.swift in Sources */,
 				893845DE263321BB00DBC43E /* WeatherResponse.swift in Sources */,
+				8915ABFE2634A3DA00F357A5 /* AirportsStore.swift in Sources */,
 				8938459F26331FC600DBC43E /* AirportListViewController.swift in Sources */,
+				8915AC142634F00F00F357A5 /* AirportDetailViewController.swift in Sources */,
 				893845D8263320B000DBC43E /* NetworkArchitecture.swift in Sources */,
+				8915AC042634BDF000F357A5 /* AirportCell.swift in Sources */,
 				8938459B26331FC500DBC43E /* AppDelegate.swift in Sources */,
 				893845EB263345D200DBC43E /* Resources.swift in Sources */,
 				8938459D26331FC500DBC43E /* SceneDelegate.swift in Sources */,
