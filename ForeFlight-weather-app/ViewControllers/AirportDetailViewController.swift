@@ -96,24 +96,25 @@ class AirportDetailViewController: UITableViewController {
     @IBAction func showNextForecastConditions(_ sender: Any) {
         if let report = report {
             if let forecast = report.forecast {
+                if forecast.conditions.isEmpty { return }
                 // if cycled through all forecast [conditions]
                 // reset
-                if forecastConditionIndex >= forecast.conditions.count - 1 {
-                    forecastConditionIndex = 0
-                    forecastMode = false
-                    setupView(report.conditions)
-                } else if !forecastMode { // else if forecast mode was false
-                    setupView(forecast)
-                    if forecastConditionIndex != 0 {
-                        forecastConditionIndex += 1
-                        setPeriodLabels()
-                    }
+                if !forecastMode { // else if forecast mode was false, show first one
                     forecastMode = true
-                } else if forecastMode { // we are cycling through and go to next
-                    forecastConditionIndex += 1
                     setPeriodLabels()
+                    setupView(forecast)
+                } else if forecastMode { // we are cycling through and go to next
+                    // first, check  to see if should reset
+                    if forecastConditionIndex >= forecast.conditions.count - 1 {
+                        forecastConditionIndex = 0
+                        forecastMode = false
+                        setupView(report.conditions)
+                        return
+                    }
+                    setPeriodLabels()
+                    forecastConditionIndex += 1
+                    tableView.reloadData() // async, so index will always be incremented first regardless
                 }
-                tableView.reloadData()
             }
         }
     }
@@ -122,7 +123,7 @@ class AirportDetailViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            let cloudGroups: Int = report?.conditions.cloudLayers.count ?? 1
+            let cloudGroups: Int = currentConditions?.cloudLayers.count ?? 1
             return cloudGroups * 3
         case 1:
             return 2
@@ -153,7 +154,8 @@ class AirportDetailViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        print("indexPath startIndex = \(indexPath.startIndex) , indexPath endIndex = \(indexPath.endIndex)")
+        print("indexPath section = \(indexPath.section) , indexPath row = \(indexPath.row)")
         // Get a new or recycled cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as! DetailCell
 
