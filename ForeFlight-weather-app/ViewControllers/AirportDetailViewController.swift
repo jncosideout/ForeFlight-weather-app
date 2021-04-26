@@ -12,6 +12,16 @@ class AirportDetailViewController: UITableViewController {
     var report: WeatherResponse.Report?
     var airportName: String!
     var reportsStore: ReportsStore!
+    var conditions: WeatherResponse.Report.Conditions?
+    var forecastMode = false
+    var forecastConditionIndex = 0
+    var currentConditions: WeatherResponse.Report.Conditions? {
+        if forecastMode {
+            return report?.forecast?.conditions[forecastConditionIndex]
+        } else {
+            return report?.conditions
+        }
+    }
 
     @IBOutlet weak var airportIDLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -19,13 +29,17 @@ class AirportDetailViewController: UITableViewController {
     @IBOutlet weak var longitudeLabel: UILabel!
     @IBOutlet weak var elevationLabel: UILabel!
     @IBOutlet weak var activitySpinner: UIActivityIndicatorView!
-
+    @IBOutlet weak var periodStartLabel: UILabel!
+    @IBOutlet weak var periodEndLabel: UILabel!
+    @IBOutlet weak var periodStartStackView: UIStackView!
+    @IBOutlet weak var periodEndStackView: UIStackView!
+    
 
     let sectionNames = ["Period","Cloud Layers", "Visibility", "Wind"]
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let report = report {
-            setupView(report)
+            setupView(report.conditions)
         } else {
             activitySpinner.isHidden = false
             activitySpinner.startAnimating()
@@ -33,12 +47,27 @@ class AirportDetailViewController: UITableViewController {
         }
     }
 
-    func setupView(_ report: WeatherResponse.Report) {
-        airportIDLabel.text = report.conditions.ident
-        dateLabel.text = report.conditions.dateIssued
-        latitudeLabel.text = String(report.conditions.lat)
-        longitudeLabel.text = String(report.conditions.lon)
-        elevationLabel.text = String(report.conditions.elevationFt)
+    func setupView(_ conditions: WeatherResponse.Report.Conditions) {
+        airportIDLabel.text = conditions.ident
+        dateLabel.text = conditions.dateIssued
+        latitudeLabel.text = String(conditions.lat)
+        longitudeLabel.text = String(conditions.lon)
+        elevationLabel.text = String(conditions.elevationFt)
+        periodStartStackView.isHidden = true
+        periodEndStackView.isHidden = true
+        tableView.reloadData()
+    }
+
+    func setupView(_ forecast: WeatherResponse.Report.Forecast) {
+        airportIDLabel.text = forecast.ident
+        dateLabel.text = forecast.dateIssued
+        latitudeLabel.text = String(forecast.lat)
+        longitudeLabel.text = String(forecast.lon)
+        elevationLabel.text = String(forecast.elevationFt)
+        periodStartStackView.isHidden = false
+        periodStartLabel.text = forecast.period.dateStart
+        periodEndStackView.isHidden = false
+        periodEndLabel.text = forecast.period.dateEnd
         tableView.reloadData()
     }
 
@@ -52,7 +81,7 @@ class AirportDetailViewController: UITableViewController {
                     self?.reportsStore.addReport(weatherResponse.report)
                     DispatchQueue.main.async {
                         self?.activitySpinner.stopAnimating()
-                        self?.setupView(weatherResponse.report)
+                        self?.setupView(weatherResponse.report.conditions)
                     }
                 }
             }
@@ -62,6 +91,31 @@ class AirportDetailViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+    }
+
+    @IBAction func showNextForecastConditions(_ sender: Any) {
+        if let report = report {
+            if let forecast = report.forecast {
+                // if cycled through all forecast [conditions]
+                // reset
+                if forecastConditionIndex >= forecast.conditions.count - 1 {
+                    forecastConditionIndex = 0
+                    forecastMode = false
+                    setupView(report.conditions)
+                } else if !forecastMode { // else if forecast mode was false
+                    setupView(forecast)
+                    if forecastConditionIndex != 0 {
+                        forecastConditionIndex += 1
+                        setPeriodLabels()
+                    }
+                    forecastMode = true
+                } else if forecastMode { // we are cycling through and go to next
+                    forecastConditionIndex += 1
+                    setPeriodLabels()
+                }
+                tableView.reloadData()
+            }
+        }
     }
 
     // MARK: - dataSource delgate fxns
@@ -87,6 +141,17 @@ class AirportDetailViewController: UITableViewController {
         return sectionNames[section + 1]
     }
 
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        setPeriodLabels()
+    }
+
+    func setPeriodLabels() {
+        if forecastMode, let currentConditions = currentConditions {
+            periodStartLabel.text = currentConditions.period?.dateStart
+            periodEndLabel.text = currentConditions.period?.dateEnd
+        }
+    }
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         // Get a new or recycled cell
@@ -95,19 +160,23 @@ class AirportDetailViewController: UITableViewController {
         var attributeName = ""
         var attributeData = ""
 
-        if let report = report {
+        let row = indexPath.row
+        if let conditions = currentConditions {
             switch indexPath.section {
             case 0:
-                switch indexPath.row {
+                let cloudIndex = row / 3
+                switch row % 3 {
                 case 0:
                     attributeName = "coverage"
-                    attributeData = (report.conditions.cloudLayers.first?.coverage)!
+                    attributeData = conditions.cloudLayers[cloudIndex].coverage ?? ""
                 case 1:
                     attributeName = "altitudeFt"
-                    attributeData = String(report.conditions.cloudLayers.first!.altitudeFt)
+                    attributeData = String(format: "%f", conditions.cloudLayers[cloudIndex].altitudeFt ?? "")
                 case 2:
                     attributeName = "ceiling"
-                    attributeData = String(report.conditions.cloudLayers.first!.ceiling)
+                    if let ceiling = conditions.cloudLayers[cloudIndex].ceiling {
+                        attributeData = String(ceiling)
+                    }
                 default:
                     attributeName = "cloudlayers"
                     attributeData = "no data for indexpath.row cloudlayers"
@@ -116,10 +185,10 @@ class AirportDetailViewController: UITableViewController {
                 switch indexPath.row {
                 case 0:
                     attributeName = "distanceSm"
-                    attributeData = String(report.conditions.visibility.distanceSm)
+                    attributeData = String(format: "%f", conditions.visibility.distanceSm ?? "")
                 case 1:
                     attributeName = "prevailingVisSm"
-                    attributeData = String(report.conditions.visibility.prevailingVisSm)
+                    attributeData = String(format: "%f", conditions.visibility.prevailingVisSm ?? "")
                 default:
                     attributeName = "visibility"
                     attributeData = "no data for indexpath.row "
@@ -128,10 +197,12 @@ class AirportDetailViewController: UITableViewController {
                 switch indexPath.row {
                 case 0:
                     attributeName = "speedKts"
-                    attributeData = String(report.conditions.wind.speedKts)
+                    attributeData = String(format: "%f", conditions.wind.speedKts ?? "")
                 case 1:
                     attributeName = "variable"
-                    attributeData = String(report.conditions.wind.variable)
+                    if let variable = conditions.wind.variable {
+                        attributeData = String(variable)
+                    }
                 default:
                     attributeName = "wind"
                     attributeData = "no data for indexpath.row "

@@ -13,7 +13,7 @@ struct WeatherResponse: Codable {
 
     struct Report: Codable {
         let conditions: Conditions
-        let forecast: Forecast
+        let forecast: Forecast?
 
         struct Conditions: Codable {
             let text: String
@@ -34,23 +34,23 @@ struct WeatherResponse: Codable {
             let period: Forecast.Period?
 
             struct CloudLayers: Codable {
-                let coverage: String
-                let altitudeFt: Double
-                let ceiling: Bool
+                let coverage: String?
+                let altitudeFt: Double?
+                let ceiling: Bool?
             }
 
             struct Visibility: Codable {
-                let distanceSm: Double
-                let prevailingVisSm: Double
+                let distanceSm: Double?
+                let prevailingVisSm: Double?
                 let distanceQualifier: Int?
                 let prevailingVisDistanceQualifie: Int?
             }
 
             struct Wind: Codable {
-                let speedKts: Double
+                let speedKts: Double?
                 let direction: Int?
                 let from: Int?
-                let variable: Bool
+                let variable: Bool?
             }
         }
 

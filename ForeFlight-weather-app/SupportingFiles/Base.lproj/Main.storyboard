@@ -104,11 +104,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="As4-xJ-Poz">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="126"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="146"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gkh-4Y-STQ">
-                                    <rect key="frame" x="8" y="2" width="398" height="123"/>
+                                    <rect key="frame" x="8" y="2" width="398" height="102.5"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CaR-1M-I5m">
                                             <rect key="frame" x="0.0" y="0.0" width="398" height="20.5"/>
@@ -195,18 +195,35 @@
                                                 </label>
                                             </subviews>
                                         </stackView>
-                                        <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="jyj-lx-9qB">
-                                            <rect key="frame" x="0.0" y="102.5" width="398" height="20.5"/>
+                                        <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="jyj-lx-9qB">
+                                            <rect key="frame" x="0.0" y="102.5" width="398" height="0.0"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" text="Schedule:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zHe-IN-HsD">
-                                                    <rect key="frame" x="0.0" y="0.0" width="348.5" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" text="Period Start:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zHe-IN-HsD">
+                                                    <rect key="frame" x="0.0" y="0.0" width="352.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rTK-JM-NsX">
-                                                    <rect key="frame" x="356.5" y="0.0" width="41.5" height="20.5"/>
+                                                    <rect key="frame" x="360.5" y="0.0" width="37.5" height="0.0"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                        <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rKo-un-Nw9">
+                                            <rect key="frame" x="0.0" y="102.5" width="398" height="0.0"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" text="Period End:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3JL-pR-hFA">
+                                                    <rect key="frame" x="0.0" y="0.0" width="352.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EUH-Xj-U0e">
+                                                    <rect key="frame" x="360.5" y="0.0" width="37.5" height="0.0"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -230,12 +247,12 @@
                             </constraints>
                         </view>
                         <activityIndicatorView key="tableFooterView" hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" id="cWC-6d-fQx">
-                            <rect key="frame" x="0.0" y="225.5" width="414" height="44"/>
+                            <rect key="frame" x="0.0" y="245.5" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </activityIndicatorView>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailCell" id="F6M-61-fYV" customClass="DetailCell" customModule="ForeFlight_weather_app" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="154" width="414" height="43.5"/>
+                                <rect key="frame" x="0.0" y="174" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="F6M-61-fYV" id="CbI-uR-ePw">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -278,6 +295,9 @@
                                 <rect key="frame" x="302" y="7" width="92" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Conditions"/>
+                                <connections>
+                                    <action selector="showNextForecastConditions:" destination="j7E-CX-9tC" eventType="touchUpInside" id="uem-zf-XrW"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -288,11 +308,15 @@
                         <outlet property="elevationLabel" destination="YdP-5r-AXY" id="0Hx-nr-oHw"/>
                         <outlet property="latitudeLabel" destination="8Ri-kr-TvC" id="xe8-WF-boo"/>
                         <outlet property="longitudeLabel" destination="fZN-QM-Prv" id="73A-Wh-tnY"/>
+                        <outlet property="periodEndLabel" destination="EUH-Xj-U0e" id="rGv-wE-Uc8"/>
+                        <outlet property="periodEndStackView" destination="rKo-un-Nw9" id="HIZ-J1-4Oe"/>
+                        <outlet property="periodStartLabel" destination="rTK-JM-NsX" id="JpK-Re-tYm"/>
+                        <outlet property="periodStartStackView" destination="jyj-lx-9qB" id="5Yq-L3-IZW"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vqp-Yd-eX8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="903" y="21"/>
+            <point key="canvasLocation" x="902.89855072463774" y="20.758928571428569"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hhe-Ef-i12">
